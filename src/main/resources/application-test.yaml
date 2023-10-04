@@ -1,0 +1,34 @@
+server:
+  port: 9090
+
+# Test profile datasource configuration (H2 in-memory database)
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: false
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    baseline-on-migrate: true
+
+springdoc:
+  api-docs:
+    path: /api-docs
+
+custom:
+  jwt:
+    #generated 256-bit hex formatted secret key
+    secret: 77397A24432646294A404E635266556A586E3272357538782F4125442A472D4B
+    expiration: 86400000
